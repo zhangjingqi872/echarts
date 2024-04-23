@@ -1,7 +1,6 @@
 from PIL import Image
 import requests
 import streamlit as st
-from streamlit_lottie import st_lottie
 from streamlit_drawable_canvas import st_canvas
 import base64
 from streamlit_extras.stylable_container import stylable_container 
