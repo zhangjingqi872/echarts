@@ -2,7 +2,6 @@ from PIL import Image
 import requests
 import streamlit as st
 import base64
-from streamlit_extras.stylable_container import stylable_container 
 import streamlit.components.v1 as components
 
 # 设置页面配置
