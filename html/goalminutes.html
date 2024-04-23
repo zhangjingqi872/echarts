@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Football Chart</title>
+    <style>
+        html,
+        body,
+        #chart {
+            width: 100%;
+            height: 50%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="svgContainer" style="position: absolute; bottom: 0; right: 0;"></div>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.2/dist/echarts.min.js"></script>
+    <div id="main" style="width:1020px;height:600px;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var data = [
+            { date: '1957年6月2日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Zhang Honggen', minute: 1, own_goal: 0, penalty: 0, year: 1957 },
+            { date: '1957年6月2日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Nian Weisi', minute: 9, own_goal: 0, penalty: 0, year: 1957 },
+            { date: '1957年6月2日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Sun Fucheng', minute: 47, own_goal: 0, penalty: 0, year: 1957 },
+            { date: '1957年6月2日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Wang Lu', minute: 75, own_goal: 0, penalty: 0, year: 1957 },
+            { date: '1976年6月5日', home_team: 'China PR', away_team: 'Malaysia', team: 'China PR', scorer: 'Wang Jilian', minute: 58, own_goal: 0, penalty: 0, year: 1976 },
+            { date: '1976年6月13日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'He Jia', minute: 61, own_goal: 0, penalty: 0, year: 1976 },
+            { date: '1980年9月18日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Li Fubao', minute: 7, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月20日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Chen Jingang', minute: 74, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月20日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Xu Yonglai', minute: 89, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Shen Xiangfu', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Shen Xiangfu', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Shen Xiangfu', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Xu Yonglai', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Xu Yonglai', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年9月25日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Xu Yonglai', minute: 'NA', own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年12月21日', home_team: 'Hong Kong', away_team: 'China PR', team: 'China PR', scorer: 'Chen Jingang', minute: 89, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年12月24日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Gu Guangming', minute: 17, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年12月24日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Zuo Shusheng', minute: 20, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年12月24日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Rong Zhixing', minute: 59, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1980年12月26日', home_team: 'China PR', away_team: 'Japan', team: 'China PR', scorer: 'Rong Zhixing', minute: 7, own_goal: 0, penalty: 0, year: 1980 },
+            { date: '1981年1月4日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Huang Xiangdong', minute: 44, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年1月4日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Chen Xirong', minute: 55, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年1月4日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Huang Xiangdong', minute: 110, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年1月4日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Gu Guangming', minute: 112, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年10月18日', home_team: 'China PR', away_team: 'Kuwait', team: 'China PR', scorer: 'Rong Zhixing', minute: 24, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年10月18日', home_team: 'China PR', away_team: 'Kuwait', team: 'China PR', scorer: 'Gu Guangming', minute: 28, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年10月18日', home_team: 'China PR', away_team: 'Kuwait', team: 'China PR', scorer: 'Shen Xiangfu', minute: 59, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Zuo Shusheng', minute: 62, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Chen Jingang', minute: 63, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Gu Guangming', minute: 76, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Huang Xiangdong', minute: 88, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月19日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Huang Xiangdong', minute: 24, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1981年11月19日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Cai Jinbiao', minute: 27, own_goal: 0, penalty: 0, year: 1981 },
+            { date: '1982年1月10日', home_team: 'China PR', away_team: 'New Zealand', team: 'China PR', scorer: 'Huang Xiangdong', minute: 75, own_goal: 0, penalty: 0, year: 1982 },
+            { date: '1984年12月5日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Jia Xiuquan', minute: 21, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月5日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Zhao Dayu', minute: 39, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月9日', home_team: 'India', away_team: 'China PR', team: 'China PR', scorer: 'Lin Lefeng', minute: 19, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月9日', home_team: 'India', away_team: 'China PR', team: 'China PR', scorer: 'Gu Guangming', minute: 59, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月9日', home_team: 'India', away_team: 'China PR', team: 'China PR', scorer: 'Jia Xiuquan', minute: 79, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月11日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Yang Zhaohui', minute: 12, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月11日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Jia Xiuquan', minute: 20, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月11日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Zuo Shusheng', minute: 36, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月11日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Zhao Dayu', minute: 52, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月11日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Gu Guangming', minute: 67, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1984年12月14日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Li Huayun', minute: 108, own_goal: 0, penalty: 0, year: 1984 },
+            { date: '1985年2月20日', home_team: 'Macau', away_team: 'China PR', team: 'China PR', scorer: 'Ng Chi Kit', minute: 44, own_goal: 1, penalty: 0, year: 1985 },
+            { date: '1985年2月20日', home_team: 'Macau', away_team: 'China PR', team: 'China PR', scorer: 'Lin Qiang', minute: 51, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月20日', home_team: 'Macau', away_team: 'China PR', team: 'China PR', scorer: 'Zuo Shusheng', minute: 52, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月20日', home_team: 'Macau', away_team: 'China PR', team: 'China PR', scorer: 'Lin Lefeng', minute: 62, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Zhao Dayu', minute: 26, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Zuo Shusheng', minute: 38, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Li Hui', minute: 40, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Liu Haiguang', minute: 44, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Liu Haiguang', minute: 47, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Zuo Shusheng', minute: 65, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Zhao Dayu', minute: 85, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年2月26日', home_team: 'China PR', away_team: 'Brunei', team: 'China PR', scorer: 'Zhao Dayu', minute: 90, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年3月1日', home_team: 'Brunei', away_team: 'China PR', team: 'China PR', scorer: 'Zhao Dayu', minute: 8, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年3月1日', home_team: 'Brunei', away_team: 'China PR', team: 'China PR', scorer: 'Liu Haiguang', minute: 15, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年3月1日', home_team: 'Brunei', away_team: 'China PR', team: 'China PR', scorer: 'Zhao Dayu', minute: 74, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年3月1日', home_team: 'Brunei', away_team: 'China PR', team: 'China PR', scorer: 'Liu Haiguang', minute: 80, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Jia Xiuquan', minute: 10, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Li Hui', minute: 12, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Yang Zhaohui', minute: 27, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Yang Zhaohui', minute: 50, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Wang Huiliang', minute: 60, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月12日', home_team: 'China PR', away_team: 'Macau', team: 'China PR', scorer: 'Zhao Dayu', minute: 67, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1985年5月19日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Li Hui', minute: 32, own_goal: 0, penalty: 0, year: 1985 },
+            { date: '1988年12月4日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Gao Sheng', minute: 13, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月4日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Xie Yuxin', minute: 14, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月4日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Xie Yuxin', minute: 19, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月6日', home_team: 'Bahrain', away_team: 'China PR', team: 'China PR', scorer: 'Zhang Xiaowen', minute: 78, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月10日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 10, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月10日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 87, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1988年12月14日', home_team: 'South Korea', away_team: 'China PR', team: 'China PR', scorer: 'Mai Chao', minute: 100, own_goal: 0, penalty: 0, year: 1988 },
+            { date: '1989年2月23日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Wang Baoshan', minute: 51, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年2月23日', home_team: 'China PR', away_team: 'Bangladesh', team: 'China PR', scorer: 'Mai Chao', minute: 57, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年2月28日', home_team: 'Thailand', away_team: 'China PR', team: 'China PR', scorer: 'Tang Yaodong', minute: 55, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年2月28日', home_team: 'Thailand', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 62, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年2月28日', home_team: 'Thailand', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 79, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年3月4日', home_team: 'Bangladesh', away_team: 'China PR', team: 'China PR', scorer: 'Wang Baoshan', minute: 23, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年3月4日', home_team: 'Bangladesh', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 62, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年7月15日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Liu Haiguang', minute: 73, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年7月15日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Zhang Xiaowen', minute: 87, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年7月22日', home_team: 'Iran', away_team: 'China PR', team: 'China PR', scorer: 'Mai Chao', minute: 64, own_goal: 0, penalty: 1, year: 1989 },
+            { date: '1989年7月22日', home_team: 'Iran', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 66, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年7月29日', home_team: 'China PR', away_team: 'Thailand', team: 'China PR', scorer: 'Jia Xiuquan', minute: 2, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年7月29日', home_team: 'China PR', away_team: 'Thailand', team: 'China PR', scorer: 'Ma Lin', minute: 4, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年10月12日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Mai Chao', minute: 63, own_goal: 0, penalty: 1, year: 1989 },
+            { date: '1989年10月12日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Mai Chao', minute: 70, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年10月17日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Tang Yaodong', minute: 61, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年10月24日', home_team: 'North Korea', away_team: 'China PR', team: 'China PR', scorer: 'Xie Yuxin', minute: 67, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1989年10月28日', home_team: 'Qatar', away_team: 'China PR', team: 'China PR', scorer: 'Ma Lin', minute: 76, own_goal: 0, penalty: 0, year: 1989 },
+            { date: '1992年10月29日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Li Bing', minute: 41, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1992年11月2日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Peng Weiguo', minute: 44, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1992年11月2日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Peng Weiguo', minute: 58, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1992年11月6日', home_team: 'Japan', away_team: 'China PR', team: 'China PR', scorer: 'Xie Yuxin', minute: 1, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1992年11月6日', home_team: 'Japan', away_team: 'China PR', team: 'China PR', scorer: 'Li Xiao', minute: 70, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1992年11月8日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Hao Haidong', minute: 15, own_goal: 0, penalty: 0, year: 1992 },
+            { date: '1993年5月22日', home_team: 'Pakistan', away_team: 'China PR', team: 'China PR', scorer: 'Gao Hongbo', minute: 38, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月22日', home_team: 'Pakistan', away_team: 'China PR', team: 'China PR', scorer: 'Cai Sheng', minute: 55, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月22日', home_team: 'Pakistan', away_team: 'China PR', team: 'China PR', scorer: 'Cai Sheng', minute: 59, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月22日', home_team: 'Pakistan', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 71, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月22日', home_team: 'Pakistan', away_team: 'China PR', team: 'China PR', scorer: 'Cai Sheng', minute: 82, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月26日', home_team: 'Jordan', away_team: 'China PR', team: 'China PR', scorer: 'Gao Hongbo', minute: 61, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月26日', home_team: 'Jordan', away_team: 'China PR', team: 'China PR', scorer: 'Wu Qunli', minute: 66, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年5月26日', home_team: 'Jordan', away_team: 'China PR', team: 'China PR', scorer: 'Cai Sheng', minute: 89, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月12日', home_team: 'China PR', away_team: 'Pakistan', team: 'China PR', scorer: 'Gao Hongbo', minute: 60, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月12日', home_team: 'China PR', away_team: 'Pakistan', team: 'China PR', scorer: 'Hao Haidong', minute: 62, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月12日', home_team: 'China PR', away_team: 'Pakistan', team: 'China PR', scorer: 'Gao Hongbo', minute: 89, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月16日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Li Bing', minute: 16, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月16日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Gao Hongbo', minute: 50, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月16日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Li Bing', minute: 76, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月16日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Gao Hongbo', minute: 80, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月18日', home_team: 'China PR', away_team: 'Yemen', team: 'China PR', scorer: 'Xu Hong', minute: 73, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月20日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Xu Hong', minute: 63, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1993年6月20日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Zhao Faqing', minute: 89, own_goal: 0, penalty: 0, year: 1993 },
+            { date: '1996年12月9日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Ma Mingyu', minute: 35, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1996年12月9日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Gao Feng', minute: 49, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1996年12月9日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Li Bing', minute: 73, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1996年12月16日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Zhang Enhua', minute: 6, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1996年12月16日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Peng Weiguo', minute: 16, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1996年12月16日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Zhang Enhua', minute: 89, own_goal: 0, penalty: 0, year: 1996 },
+            { date: '1997年5月4日', home_team: 'Turkmenistan', away_team: 'China PR', team: 'China PR', scorer: 'Peng Weiguo', minute: 26, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月4日', home_team: 'Turkmenistan', away_team: 'China PR', team: 'China PR', scorer: 'Peng Weiguo', minute: 39, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月4日', home_team: 'Turkmenistan', away_team: 'China PR', team: 'China PR', scorer: 'Gao Feng', minute: 78, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月4日', home_team: 'Turkmenistan', away_team: 'China PR', team: 'China PR', scorer: 'Li Bing', minute: 80, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月11日', home_team: 'Tajikistan', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 65, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月25日', home_team: 'Vietnam', away_team: 'China PR', team: 'China PR', scorer: 'Li Bing', minute: 23, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月25日', home_team: 'Vietnam', away_team: 'China PR', team: 'China PR', scorer: 'Fan Zhiyi', minute: 32, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年5月25日', home_team: 'Vietnam', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 44, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年6月1日', home_team: 'China PR', away_team: 'Turkmenistan', team: 'China PR', scorer: 'Li Jinyu', minute: 81, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年6月22日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Fan Zhiyi', minute: 7, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年6月22日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Hao Haidong', minute: 45, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年6月22日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Ma Mingyu', minute: 65, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年6月22日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Su Maozhen', minute: 70, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年9月13日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Fan Zhiyi', minute: 44, own_goal: 0, penalty: 1, year: 1997 },
+            { date: '1997年9月13日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Li Ming', minute: 54, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年9月26日', home_team: 'Qatar', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 67, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月3日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Zhang Enhua', minute: 69, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月10日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 3, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月10日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Gao Feng', minute: 89, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月17日', home_team: 'Iran', away_team: 'China PR', team: 'China PR', scorer: 'Mao Yijun', minute: 87, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月31日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Gao Feng', minute: 19, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年10月31日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Fan Zhiyi', minute: 80, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年11月6日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 10, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '1997年11月12日', home_team: 'China PR', away_team: 'Kuwait', team: 'China PR', scorer: 'Ma Mingyu', minute: 32, own_goal: 0, penalty: 0, year: 1997 },
+            { date: '2000年10月13日', home_team: 'South Korea', away_team: 'China PR', team: 'China PR', scorer: 'Su Maozhen', minute: 36, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月13日', home_team: 'South Korea', away_team: 'China PR', team: 'China PR', scorer: 'Fan Zhiyi', minute: 66, own_goal: 0, penalty: 1, year: 2000 },
+            { date: '2000年10月16日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Li Ming', minute: 2, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月16日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Shen Si', minute: 7, own_goal: 0, penalty: 1, year: 2000 },
+            { date: '2000年10月16日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Yang Chen', minute: 10, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月16日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Qi Hong', minute: 90, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月23日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Li Ming', minute: 9, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月23日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Qi Hong', minute: 38, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月23日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Yang Chen', minute: 54, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月26日', home_team: 'China PR', away_team: 'Japan', team: 'China PR', scorer: 'Qi Hong', minute: 30, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2000年10月26日', home_team: 'China PR', away_team: 'Japan', team: 'China PR', scorer: 'Yang Chen', minute: 48, own_goal: 0, penalty: 0, year: 2000 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Xu Yunlong', minute: 12, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Wu Chengying', minute: 18, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Xie Hui', minute: 42, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Xu Yunlong', minute: 45, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Xie Hui', minute: 50, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Fan Zhiyi', minute: 52, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Yang Chen', minute: 61, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Xie Hui', minute: 63, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Fan Zhiyi', minute: 74, own_goal: 0, penalty: 1, year: 2001 },
+            { date: '2001年4月22日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Li Weifeng', minute: 89, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年4月28日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Xie Hui', minute: 44, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月6日', home_team: 'Cambodia', away_team: 'China PR', team: 'China PR', scorer: 'Li Jinyu', minute: 5, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月6日', home_team: 'Cambodia', away_team: 'China PR', team: 'China PR', scorer: 'Qu Bo', minute: 43, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月6日', home_team: 'Cambodia', away_team: 'China PR', team: 'China PR', scorer: 'Ma Mingyu', minute: 58, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月6日', home_team: 'Cambodia', away_team: 'China PR', team: 'China PR', scorer: 'Li Jinyu', minute: 63, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月13日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Li Weifeng', minute: 50, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月13日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Yang Chen', minute: 62, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月13日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Xie Hui', minute: 71, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月13日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Qi Hong', minute: 82, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月13日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Xie Hui', minute: 90, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月20日', home_team: 'China PR', away_team: 'Cambodia', team: 'China PR', scorer: 'Ma Mingyu', minute: 5, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月20日', home_team: 'China PR', away_team: 'Cambodia', team: 'China PR', scorer: 'Xu Yunlong', minute: 22, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月20日', home_team: 'China PR', away_team: 'Cambodia', team: 'China PR', scorer: 'Li Bing', minute: 87, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月27日', home_team: 'Indonesia', away_team: 'China PR', team: 'China PR', scorer: 'Xie Hui', minute: 45, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年5月27日', home_team: 'Indonesia', away_team: 'China PR', team: 'China PR', scorer: 'Wu Chengying', minute: 69, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年8月25日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Li Xiaopeng', minute: 2, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年8月25日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Qi Hong', minute: 19, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年8月25日', home_team: 'China PR', away_team: 'United Arab Emirates', team: 'China PR', scorer: 'Hao Haidong', minute: 33, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年8月31日', home_team: 'Oman', away_team: 'China PR', team: 'China PR', scorer: 'Qi Hong', minute: 70, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年8月31日', home_team: 'Oman', away_team: 'China PR', team: 'China PR', scorer: 'Fan Zhiyi', minute: 84, own_goal: 0, penalty: 1, year: 2001 },
+            { date: '2001年9月7日', home_team: 'Qatar', away_team: 'China PR', team: 'China PR', scorer: 'Li Weifeng', minute: 90, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年9月15日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Li Weifeng', minute: 63, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年9月15日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Fan Zhiyi', minute: 76, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年9月27日', home_team: 'United Arab Emirates', away_team: 'China PR', team: 'China PR', scorer: 'Qi Hong', minute: 43, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年10月7日', home_team: 'China PR', away_team: 'Oman', team: 'China PR', scorer: 'Yu Genwei', minute: 36, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年10月13日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Su Maozhen', minute: 11, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年10月13日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Qu Bo', minute: 29, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2001年10月13日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Hao Haidong', minute: 57, own_goal: 0, penalty: 0, year: 2001 },
+            { date: '2004年2月18日', home_team: 'China PR', away_team: 'Kuwait', team: 'China PR', scorer: 'Hao Haidong', minute: 75, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年3月31日', home_team: 'Hong Kong', away_team: 'China PR', team: 'China PR', scorer: 'Hao Haidong', minute: 71, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年6月9日', home_team: 'China PR', away_team: 'Malaysia', team: 'China PR', scorer: 'Hao Haidong', minute: 43, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年6月9日', home_team: 'China PR', away_team: 'Malaysia', team: 'China PR', scorer: 'Sun Jihai', minute: 62, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年6月9日', home_team: 'China PR', away_team: 'Malaysia', team: 'China PR', scorer: 'Li Xiaopeng', minute: 66, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年6月9日', home_team: 'China PR', away_team: 'Malaysia', team: 'China PR', scorer: 'Li Xiaopeng', minute: 76, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月17日', home_team: 'China PR', away_team: 'Bahrain', team: 'China PR', scorer: 'Zheng Zhi', minute: 58, own_goal: 0, penalty: 1, year: 2004 },
+            { date: '2004年7月17日', home_team: 'China PR', away_team: 'Bahrain', team: 'China PR', scorer: 'Li Jinyu', minute: 66, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月21日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Shao Jiayi', minute: 25, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月21日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Hao Haidong', minute: 40, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月21日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Li Ming', minute: 51, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月21日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Shao Jiayi', minute: 66, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月21日', home_team: 'China PR', away_team: 'Indonesia', team: 'China PR', scorer: 'Li Yi', minute: 80, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月25日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Xu Yunlong', minute: 77, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月30日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Hao Haidong', minute: 8, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年7月30日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Zheng Zhi', minute: 81, own_goal: 0, penalty: 1, year: 2004 },
+            { date: '2004年7月30日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Zheng Zhi', minute: 90, own_goal: 0, penalty: 1, year: 2004 },
+            { date: '2004年8月3日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Shao Jiayi', minute: 18, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年8月7日', home_team: 'China PR', away_team: 'Japan', team: 'China PR', scorer: 'Li Ming', minute: 31, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年9月8日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Li Jinyu', minute: 67, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Li Jinyu', minute: 8, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Shao Jiayi', minute: 42, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Shao Jiayi', minute: 44, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Li Jinyu', minute: 47, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Xu Yunlong', minute: 49, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Yu Genwei', minute: 88, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2004年11月17日', home_team: 'China PR', away_team: 'Hong Kong', team: 'China PR', scorer: 'Li Weifeng', minute: 90, own_goal: 0, penalty: 0, year: 2004 },
+            { date: '2007年7月10日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Han Peng', minute: 15, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月10日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Shao Jiayi', minute: 36, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月10日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Wang Dong', minute: 51, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月10日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Han Peng', minute: 55, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月10日', home_team: 'Malaysia', away_team: 'China PR', team: 'China PR', scorer: 'Wang Dong', minute: 90, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月15日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Shao Jiayi', minute: 7, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年7月15日', home_team: 'China PR', away_team: 'Iran', team: 'China PR', scorer: 'Mao Jianqing', minute: 33, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Qu Bo', minute: 17, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Du Zhenyu', minute: 22, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Yang Lin', minute: 58, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Liu Jian', minute: 63, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Li Jinyu', minute: 76, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Li Weifeng', minute: 79, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月21日', home_team: 'China PR', away_team: 'Myanmar', team: 'China PR', scorer: 'Qu Bo', minute: 81, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月28日', home_team: 'Myanmar', away_team: 'China PR', team: 'China PR', scorer: 'Wu Wei\'an', minute: 13, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月28日', home_team: 'Myanmar', away_team: 'China PR', team: 'China PR', scorer: 'Liu Jian', minute: 14, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月28日', home_team: 'Myanmar', away_team: 'China PR', team: 'China PR', scorer: 'Zheng Bin', minute: 35, own_goal: 0, penalty: 0, year: 2007 },
+            { date: '2007年10月28日', home_team: 'Myanmar', away_team: 'China PR', team: 'China PR', scorer: 'Zhang Yaokun', minute: 39, own_goal: 0, penalty: 1, year: 2007 },
+            { date: '2008年2月6日', home_team: 'Iraq', away_team: 'China PR', team: 'China PR', scorer: 'Zheng Zhi', minute: 75, own_goal: 0, penalty: 0, year: 2008 },
+            { date: '2008年6月14日', home_team: 'China PR', away_team: 'Iraq', team: 'China PR', scorer: 'Zhou Haibin', minute: 33, own_goal: 0, penalty: 0, year: 2008 },
+            { date: '2008年6月22日', home_team: 'Australia', away_team: 'China PR', team: 'China PR', scorer: 'Sun Xiang', minute: 12, own_goal: 0, penalty: 0, year: 2008 },
+            { date: '2011年1月8日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Zhang Linpeng', minute: 58, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年1月8日', home_team: 'Kuwait', away_team: 'China PR', team: 'China PR', scorer: 'Deng Zhuoxiang', minute: 67, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年1月16日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Yu Hai', minute: 6, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年1月16日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Hao Junmin', minute: 56, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Yang Xu', minute: 45, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Chen Tao', minute: 52, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Yang Xu', minute: 54, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Yang Xu', minute: 73, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Hao Junmin', minute: 81, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Chen Tao', minute: 88, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月23日', home_team: 'China PR', away_team: 'Laos', team: 'China PR', scorer: 'Hao Junmin', minute: 90, own_goal: 0, penalty: 1, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Qu Bo', minute: 24, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Yu Hanchao', minute: 36, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Deng Zhuoxiang', minute: 67, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Deng Zhuoxiang', minute: 82, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Yu Hanchao', minute: 87, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年7月28日', home_team: 'Laos', away_team: 'China PR', team: 'China PR', scorer: 'Yang Xu', minute: 90, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年9月2日', home_team: 'China PR', away_team: 'Singapore', team: 'China PR', scorer: 'Zheng Zhi', minute: 69, own_goal: 0, penalty: 1, year: 2011 },
+            { date: '2011年9月2日', home_team: 'China PR', away_team: 'Singapore', team: 'China PR', scorer: 'Yu Hai', minute: 73, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年9月6日', home_team: 'Jordan', away_team: 'China PR', team: 'China PR', scorer: 'Hao Junmin', minute: 57, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年11月15日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Yu Hai', minute: 41, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年11月15日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Li Weifeng', minute: 56, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年11月15日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Zheng Zheng', minute: 73, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2011年11月15日', home_team: 'Singapore', away_team: 'China PR', team: 'China PR', scorer: 'Zheng Zheng', minute: 81, own_goal: 0, penalty: 0, year: 2011 },
+            { date: '2012年2月29日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Hao Junmin', minute: 43, own_goal: 0, penalty: 0, year: 2012 },
+            { date: '2012年2月29日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Hao Junmin', minute: 69, own_goal: 0, penalty: 0, year: 2012 },
+            { date: '2012年2月29日', home_team: 'China PR', away_team: 'Jordan', team: 'China PR', scorer: 'Yu Dabao', minute: 88, own_goal: 0, penalty: 0, year: 2012 },
+            { date: '2015年1月10日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Yu Hai', minute: 81, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年1月14日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Wu Xi', minute: 54, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年1月14日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Sun Ke', minute: 68, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年1月18日', home_team: 'China PR', away_team: 'North Korea', team: 'China PR', scorer: 'Sun Ke', minute: 1, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年1月18日', home_team: 'China PR', away_team: 'North Korea', team: 'China PR', scorer: 'Sun Ke', minute: 42, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Yang Xu', minute: 45, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 55, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Yang Xu', minute: 60, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Yu Dabao', minute: 67, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Yang Xu', minute: 76, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年6月16日', home_team: 'Bhutan', away_team: 'China PR', team: 'China PR', scorer: 'Yu Dabao', minute: 83, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年9月8日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Yu Dabao', minute: 8, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年9月8日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Yu Dabao', minute: 57, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年9月8日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Zhang Linpeng', minute: 66, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Mei Fang', minute: 10, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yang Xu', minute: 13, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yu Dabao', minute: 16, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yang Xu', minute: 21, own_goal: 0, penalty: 1, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yu Hanchao', minute: 34, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yang Xu', minute: 37, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yu Dabao', minute: 39, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yang Xu', minute: 52, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Wang Yongpo', minute: 66, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Yu Hanchao', minute: 72, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Wang Yongpo', minute: 81, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2015年11月12日', home_team: 'China PR', away_team: 'Bhutan', team: 'China PR', scorer: 'Zhang Xizhe', minute: 88, own_goal: 0, penalty: 0, year: 2015 },
+            { date: '2016年3月24日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Jiang Ning', minute: 2, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年3月24日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Yang Xu', minute: 12, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年3月24日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Jiang Ning', minute: 84, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年3月24日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Jiang Ning', minute: 90, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年3月29日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Huang Bowen', minute: 57, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年3月29日', home_team: 'China PR', away_team: 'Qatar', team: 'China PR', scorer: 'Wu Lei', minute: 88, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年9月1日', home_team: 'South Korea', away_team: 'China PR', team: 'China PR', scorer: 'Yu Hai', minute: 74, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2016年9月1日', home_team: 'South Korea', away_team: 'China PR', team: 'China PR', scorer: 'Hao Junmin', minute: 77, own_goal: 0, penalty: 0, year: 2016 },
+            { date: '2017年3月23日', home_team: 'China PR', away_team: 'South Korea', team: 'China PR', scorer: 'Yu Dabao', minute: 35, own_goal: 0, penalty: 0, year: 2017 },
+            { date: '2017年6月13日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Gao Lin', minute: 68, own_goal: 0, penalty: 1, year: 2017 },
+            { date: '2017年6月13日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Wu Xi', minute: 75, own_goal: 0, penalty: 0, year: 2017 },
+            { date: '2017年8月31日', home_team: 'China PR', away_team: 'Uzbekistan', team: 'China PR', scorer: 'Gao Lin', minute: 84, own_goal: 0, penalty: 1, year: 2017 },
+            { date: '2017年9月5日', home_team: 'Qatar', away_team: 'China PR', team: 'China PR', scorer: 'Xiao Zhi', minute: 74, own_goal: 0, penalty: 0, year: 2017 },
+            { date: '2017年9月5日', home_team: 'Qatar', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 84, own_goal: 0, penalty: 0, year: 2017 },
+            { date: '2019年1月7日', home_team: 'China PR', away_team: 'Kyrgyzstan', team: 'China PR', scorer: 'Pavel Matyash', minute: 50, own_goal: 1, penalty: 0, year: 2019 },
+            { date: '2019年1月7日', home_team: 'China PR', away_team: 'Kyrgyzstan', team: 'China PR', scorer: 'Yu Dabao', minute: 78, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年1月11日', home_team: 'Philippines', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 40, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年1月11日', home_team: 'Philippines', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 66, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年1月11日', home_team: 'Philippines', away_team: 'China PR', team: 'China PR', scorer: 'Yu Dabao', minute: 80, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年1月20日', home_team: 'Thailand', away_team: 'China PR', team: 'China PR', scorer: 'Xiao Zhi', minute: 67, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年1月20日', home_team: 'Thailand', away_team: 'China PR', team: 'China PR', scorer: 'Gao Lin', minute: 71, own_goal: 0, penalty: 1, year: 2019 },
+            { date: '2019年9月10日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Wu Xi', minute: 34, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年9月10日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 45, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年9月10日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Yang Xu', minute: 64, own_goal: 0, penalty: 1, year: 2019 },
+            { date: '2019年9月10日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Elkeson', minute: 83, own_goal: 0, penalty: 1, year: 2019 },
+            { date: '2019年9月10日', home_team: 'Maldives', away_team: 'China PR', team: 'China PR', scorer: 'Elkeson', minute: 90, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Yang Xu', minute: 6, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Wu Lei', minute: 17, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Yang Xu', minute: 19, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Yang Xu', minute: 24, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Yang Xu', minute: 31, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Wu Xi', minute: 45, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年10月10日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Elkeson', minute: 75, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2019年11月14日', home_team: 'Syria', away_team: 'China PR', team: 'China PR', scorer: 'Wu Lei', minute: 30, own_goal: 0, penalty: 0, year: 2019 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Wu Lei', minute: 20, own_goal: 0, penalty: 1, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Jin Jingdao', minute: 39, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Wu Lei', minute: 55, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Wu Xi', minute: 61, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Elkeson', minute: 65, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Alan Carvalho', minute: 83, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年5月30日', home_team: 'China PR', away_team: 'Guam', team: 'China PR', scorer: 'Alan Carvalho', minute: 87, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月7日', home_team: 'China PR', away_team: 'Philippines', team: 'China PR', scorer: 'Wu Lei', minute: 56, own_goal: 0, penalty: 1, year: 2021 },
+            { date: '2021年6月7日', home_team: 'China PR', away_team: 'Philippines', team: 'China PR', scorer: 'Wu Xinghan', minute: 65, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月11日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Liu Binbin', minute: 5, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月11日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Wu Lei', minute: 30, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月11日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Alan Carvalho', minute: 68, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月11日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Zhang Yuning', minute: 69, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月11日', home_team: 'China PR', away_team: 'Maldives', team: 'China PR', scorer: 'Tan Long', minute: 79, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月15日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Zhang Xizhe', minute: 43, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年6月15日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Wu Lei', minute: 69, own_goal: 0, penalty: 1, year: 2021 },
+            { date: '2021年6月15日', home_team: 'China PR', away_team: 'Syria', team: 'China PR', scorer: 'Zhang Yuning', minute: 90, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年10月7日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Zhang Yuning', minute: 53, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年10月7日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Wu Lei', minute: 75, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年10月7日', home_team: 'China PR', away_team: 'Vietnam', team: 'China PR', scorer: 'Wu Lei', minute: 90, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年10月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Alo铆sio', minute: 46, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年10月12日', home_team: 'Saudi Arabia', away_team: 'China PR', team: 'China PR', scorer: 'Wu Xi', minute: 87, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年11月11日', home_team: 'China PR', away_team: 'Oman', team: 'China PR', scorer: 'Wu Lei', minute: 21, own_goal: 0, penalty: 0, year: 2021 },
+            { date: '2021年11月16日', home_team: 'China PR', away_team: 'Australia', team: 'China PR', scorer: 'Wu Lei', minute: 71, own_goal: 0, penalty: 1, year: 2021 },
+            { date: '2022年2月1日', home_team: 'Vietnam', away_team: 'China PR', team: 'China PR', scorer: 'Xu Xin', minute: 90, own_goal: 0, penalty: 0, year: 2022 },
+            { date: '2022年3月24日', home_team: 'China PR', away_team: 'Saudi Arabia', team: 'China PR', scorer: 'Zhu Chenjie', minute: 82, own_goal: 0, penalty: 1, year: 2022 }
+        ];
+
+        const dates = [];
+        for (let i = 0; i < data.length; ++i) {
+            if (dates.length === 0 || dates[dates.length - 1] !== data[i].date) {
+                dates.push(data[i].date);
+            }
+        }
+
+        console.log(dates);
+
+        // 初始化图表数据为初始日期（例如1957年6月2日的进球时间数据）
+        var currentDate = '1957年6月2日';
+        updateChart(currentDate);
+
+        // 提取年份列表
+        var years = Array.from(new Set(data.map(item => item.year)));
+
+        // 根据年份过滤数据
+        var filteredData = years.map(year => {
+            return {
+                year: year,
+                data: data.filter(item => item.year === year)
+            };
+        });
+
+
+        function updateChart(year) {
+            // 根据年份过滤数据
+            var filteredData = data.filter(function (item) {
+                return item.year === year;
+            });
+
+            // 提取日期列表
+            var dates = Array.from(new Set(filteredData.map(function (item) {
+                return item.date;
+            })));
+
+            // 生成不同日期对应的颜色
+            var colorMap = {};
+            var colorList = ['orange', 'tomato', 'skyblue', 'purple', '#92aaca', 'yellowgreen', 'bisque', 'coral', 'plum'];
+            dates.forEach(function (date, index) {
+                colorMap[date] = colorList[index % colorList.length];
+            });
+
+            // 更新图表数据
+            myChart.setOption({
+                title: {
+                    text: 'Football Chart',
+                    subtext: 'Goal minutes'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: ['Goals']
+                },
+                xAxis: {
+                    type: 'category',
+                    data: dates
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    name: 'Goals',
+                    type: 'scatter',
+                    data: filteredData.map(function (item) {
+                        return {
+                            value: [item.date, item.minute],
+                            itemStyle: {
+                                color: colorMap[item.date] // 通过颜色映射函数设置每个数据点的颜色
+                            }
+                        };
+                    })
+                }],
+                backgroundColor: 'transparent',
+                toolbox: {
+                    feature: {
+                        saveAsImage: { show: true },
+                        dataView: { show: true },
+                        restore: { show: true }
+                    }
+                }
+            });
+
+            // 在控制台打印年份和对应的日期列表，方便验证
+            console.log('Year:', year);
+            console.log('Dates:', dates);
+        }
+
+        for (var i = 0; i < years.length; i++) {
+            (function (index) {
+                setTimeout(function () {
+                    var currentYear = years[index];
+                    updateChart(currentYear);
+                }, index * 2000); // 设置不同的延迟时间，每次增加1秒
+            })(i);
+        }
+
+        // 在画布的右下角添加 hellosvg.html
+        var svgContainer = document.getElementById('svgContainer');
+        var iframe = document.createElement('iframe');
+        iframe.src = 'html/hellosvg.html';
+        iframe.style.width = '500px';
+        iframe.style.height = '250px';
+        iframe.style.marginRight = '80px';
+        iframe.style.marginBottom = '0.5px';
+        iframe.style.border = 'none'; // 去除边框样式
+        svgContainer.appendChild(iframe);
+    </script>
+</body>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>琪哥出品</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Inconsolata');
+
+        #drawing {
+            width: 100%;
+            height: 100%;
+        }
+
+        tspan {
+            fill: #e5e5e5;
+            stroke: tomato;
+            stroke-width: 0.85;
+            font-family: 'Inconsolata';
+        }
+
+    </style>
+</head>
+<body>
+    <div id="drawing"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/svg.js/3.1.1/svg.min.js"></script>
+    <script>
+        const value="--HELLO,I'm Jingqi Zhang--"
+        var input = document.querySelector('input[type=text]')
+        var draw = SVG().addTo('#drawing').size('100%','100%')
+        var text = draw.text(function(add) {
+            add.tspan(value)
+        })
+
+        textPath = text.path('M10 80 C 40 10, 65 10, 95 80 S 150 150, 280 80')
+
+        textPath.animate(1000).ease('<>')
+            .plot('M10 80 C 40 150, 65 150, 95 80 S 150 10, 280 80')
+            .loop(true, true)
+
+        function updateText(textPath) {
+            return function() {
+                textPath.tspan(this.value)
+            }				
+        }
+    </script>
+</body>
+</html>
