@@ -14,7 +14,7 @@ with open("html/goalminutes.html", "r",encoding = 'utf-8') as f:
 with open("html/hellosvg.html", "r",encoding = 'utf-8') as f:
     html1 = f.read()
 
-left_column,right_column = st.columns((1.8,1))
+left_column,right_column = st.columns((2,1))
 
 with left_column:
     # 使用st.components.v1.html函数将HTML文件嵌入到Streamlit中
