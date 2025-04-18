@@ -1,0 +1,41 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    outline: none;
+    text-decoration: none;
+    height: 100%;
+}
+
+body {
+    /* 修正渐变语法并合并背景属性 */
+    font-family: 'Days One', sans-serif;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 160vh;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background-image: linear-gradient(to bottom, rgba(181, 235, 255, 0) 20%, rgba(79, 117, 150, 0.8) 80%);
+    z-index: 1;
+}
+
+body .shell-main-footer {
+    width: 100%;
+    position: relative;
+    height: 100px;
+    transform: translateY(100px);
+    display: flex;
+    justify-content: center;
+    letter-spacing: 5px;
+    align-items: center;
+    text-align: center;
+    font: 100 30px 'font';
+    background-color: #8fb1fc65;
+}
