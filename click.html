@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界之声</title>
+    <style>
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+        }
+        
+        span {
+            /* 让弹出来的文字不被选中，影响操作体验 */
+            user-select: none;
+            cursor: default;
+            font-size: 20px;
+            color: blanchedalmond;
+            position: absolute;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // 设置随机出现的文字数组
+        var arr = [];
+
+        // 从JSON文件加载评论
+        fetch('./json/merged.json')
+            .then(response => response.json())
+            .then(data => {
+                // 提取所有非空的text值
+                data.forEach(item => {
+                    if (item.text && item.text.trim() !== '') {
+                        arr.push(item.text);
+                    }
+                });
+
+                // 如果没有获取到任何评论，使用默认文字
+                if (arr.length === 0) {
+                    arr = ["在这披霜戴雪的冬日，一头扎进这沸腾的生命", "命运如同手中的掌纹，无论多么曲折，始终掌握在你的手里", "少言自寡，胜过千言万语"];
+                }
+            })
+            .catch(error => {
+                console.error('加载评论失败:', error);
+                // 加载失败时使用默认文字
+                arr = ["在这披霜戴雪的冬日，一头扎进这沸腾的生命", "命运如同手中的掌纹，无论多么曲折，始终掌握在你的手里", "少言自寡，胜过千言万语"];
+            });
+        document.onclick = function(x) {
+            // 创建元素节点对象
+            var span = document.createElement("span")
+                // 获取当前鼠标的坐标
+            span.style.left = x.clientX + "px"
+            span.style.top = x.clientY + "px"
+                // 让span的值为arr数组内随机的一个值
+            span.innerHTML = arr[Math.floor(Math.random() * arr.length)]
+                // 设置span的动画效果
+            setTimeout(function() {
+                span.style.opacity = "1"
+                span.style.transform = "translateY(-100px)"
+            }, 100)
+            setTimeout(function() {
+                    span.style.opacity = "0"
+                    span.style.transform = "translateY(-230px)"
+                }, 1500)
+                // 清掉opacort为0的span
+            var chi = document.getElementsByClassName("span")
+            for (var i = 0; i < chi.length; i++) {
+                if (chi[i].style.opacity === "0") {
+                    document.body.removeChild(chi[i])
+                }
+            }
+            // 将span添加到body里
+            document.body.appendChild(span)
+        }
+    </script>
+</body>
+
+</html>

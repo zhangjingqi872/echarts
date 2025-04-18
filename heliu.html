@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECharts Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="./js/echarts.js"></script>
+</head>
+<body>
+  <!-- 第一步，创建 DIV 容器 -->
+  <div id="firstchart" style="width: 100%; height:600px;"></div>
+  <script>
+    // 整理 dataset.source 数据为二维数组形式
+    let sourceData = [
+      ['时间', '马王堆导引术', '易筋经', '八段锦', '五禽戏', '黄帝内经', '导引术', '综合'],
+      ['2020年1-3月', 45, 165804, 2079343, 850086, 226918, 21603, 3343799],
+      ['2020年4-6月', 435, 81270, 2801139, 361873, 6052, 2910, 3253679],
+      ['2020年7-9月', 81, 19410, 7049251, 154510, 21363, 2917, 7247532],
+      ['2020年10-12月', 430, 128368, 422151, 238846, 2759, 3025, 795579],
+      ['2021年1-3月', 23, 11852, 247682, 110975, 29359, 991, 400882],
+      ['2021年4-6月', 20, 548528, 489531, 211307, 1478, 7295, 1258159],
+      ['2021年7-9月', 2414, 173622, 979534, 517587, 258175, 5346, 1936678],
+      ['2021年10-12月', 1, 66380, 1174463, 728047, 105153, 1323, 2075367],
+      ['2022年1-3月', 2, 26686, 170852, 66628, 36887, 1727, 302782],
+      ['2022年4-6月', 10283, 39444, 299325, 45625, 9530, 10833, 415040],
+      ['2022年7-9月', 37, 23762, 448514, 0, 1920, 962, 475195],
+      ['2022年10-12月', 78, 56702, 3291970, 256, 5638, 1087, 3355731],
+      ['2023年1-3月', 1825, 52572, 30608, 152, 2968, 2709, 90834],
+      ['2023年4-6月', 2651, 41472, 3273920, 0, 17054, 3816, 3338913],
+      ['2023年7-9月', 17, 74450, 2936069, 1788, 1026610, 20871, 4059805],
+      ['2023年10-12月', 30, 24708, 3171113, 7048, 113558, 12895, 3329352],
+      ['2024年1-3月', 21, 13472, 3967673, 1847066, 975434, 8933, 6812599],
+      ['2024年4-6月', 5607, 27486, 2161668, 1871897, 542862, 9594, 4619114],
+      ['2024年7-9月', 1423, 30366, 1535226, 0, 731980, 3210, 2302205],
+      ['2024年10-12月', 2694, 98534, 2800156, 0, 1492870, 7011, 4401265]
+    ];
+    // 第二步：基于已经创建的容器生成一个 echarts 实例
+    //选择容器
+    let dom = document.getElementById('firstchart');
+    //基于容器dom创建一个echarts实例
+    let mychart = echarts.init(dom);
+    let option = {
+      dataset: {
+        source: sourceData
+      },
+      title: {
+        text: '2020年-2025年评论数'
+      },
+      legend: {
+        // 添加所有系列名称到 legend.data
+        data: ['马王堆导引术', '易筋经', '八段锦', '五禽戏', '黄帝内经', '导引术', '综合'],
+        textStyle: {
+          color: 'black' // 设置图例文字颜色为黑色
+        }
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: function (params) {
+          return params.seriesName;
+        }
+      },
+      toolbox: {
+        feature: {
+          saveAsImage: {}
+        }
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false
+      },
+      yAxis: {},
+      series: [
+        {
+          name: '马王堆导引术',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'RGB(239, 164, 132)'
+              },
+              {
+                offset: 1,
+                color: 'RGB(182, 118, 108)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'RGB(239, 164, 132)'
+              },
+              {
+                offset: 1,
+                color: 'RGB(182, 118, 108)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '易筋经',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(235, 207, 158)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(239,164, 132)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(235, 207, 158)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(239,164, 132)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '八段锦',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(197, 233, 227)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(255, 183, 195)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(197, 233, 227)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(255, 183, 195)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '五禽戏',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(184, 168, 207)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(231, 188, 198)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(184, 168, 207)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(231, 188, 198)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '黄帝内经',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(138, 140, 191)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(184, 168, 207)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(138, 140, 191)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(184, 168, 207)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '导引术',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(182, 118, 108)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(182, 118, 108)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'rgb(182, 118, 108)'
+              },
+              {
+                offset: 1,
+                color: 'rgb(182, 118, 108)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        },
+        {
+          name: '综合',
+          type: 'line',
+          stack: 'Total',
+          smooth: true,
+          lineStyle: {
+            width: 0
+          },
+          showSymbol: false,
+          areaStyle: {
+            opacity: 0.8,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'RGB(078, 101, 155)'
+              },
+              {
+                offset: 1,
+                color: 'RGB(138, 140, 191)'
+              }
+            ]),
+            emphasis: {
+              opacity: 1
+            }
+          },
+          itemStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: 'RGB(078, 101, 155)'
+              },
+              {
+                offset: 1,
+                color: 'RGB(138, 140, 191)'
+              }
+            ])
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          datasetIndex: 0,
+          seriesLayoutBy: 'column'
+        }
+      ]
+    };
+    // 第四步：基于配置项进行实例的渲染
+    mychart.setOption(option);
+    window.addEventListener('resize', () => {
+      mychart.resize()
+    });
+  </script>
+</body>
+</html>

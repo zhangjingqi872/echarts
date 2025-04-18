@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导引术数据可视化</title>
+    <link rel="stylesheet" href="css/jarallax.css">
+    <link rel="stylesheet" href="css/change.css">
+    <!-- 替换本地echarts.js为CDN版本 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="change">
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 -200">2020年疫情爆发...</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <!-- 替换图片为ECharts图表 -->
+                        <div id="firstchart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>此图表展示了2020年至2024年间，各种导引术相关主题的评论数量变化趋势，包括易筋经、五禽戏、马王堆导引术、黄帝内经和导引术的综合数据。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 200">八段锦、五禽戏辅助治疗...</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <img class="jarallax-img" src="images/qigong.jpg">
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>“未病先防、既病防变，”疫情的两次爆发，也是八段锦和五禽戏两次被带进人们的视野，无论是对疾病的防控，还是病后的辅助治疗，通过舒缓而柔和的八段锦和五禽戏，在强身健体的同时，也起到了调节心理的作用，因此其在疫情之后也得到了极大的关注</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 -200">...养生功导引术被更多人关注</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <img class="jarallax-img" src="images/wqx+yjj.jpg" style="position: relative !important; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: none !important;">
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>易筋经主题分析 Topic 0：易筋经源于少林，作为健身气功存在。 Topic 1：相关视频展示易筋经练习，提及了易筋经练习具有升阳、调节气血、改善体质等功效。 <br />五禽戏主题分析 Topic 2：呈现中医与五禽戏融合所带来的健康生活方式。 Topic 3：强调五禽戏作为模仿动物动作的气功起源与属性。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 200">是传统文化的机遇，也是陷阱...</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <!-- 替换图片为3D知识图谱 -->
+                        <iframe src="weibo_knowledge_graph_3d.html" style="width: 100%; height: 100%; border: none; position: relative !important; transform: none !important;"></iframe>
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>导引术得到了更多关注的同时，也有很多人在借此故弄玄虚，卖课或是打小广告</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 -200">评论数据分析</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <!-- 添加visualization.html中的时间评论数图表 -->
+                        <div id="time-chart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>此图表展示了不同时间段内导引术相关话题的评论数量变化趋势，反映了公众对传统养生功法的关注度随时间的变化。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 -200">评论互动分析</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <!-- 添加visualization.html中的heart图表 -->
+                        <div id="heart-chart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>此图表展示了获赞评论与普通评论的比例，反映了导引术相关话题中高质量内容的占比情况。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bbox">
+                <h2 data-jarallax-element="0 200">年度评论趋势</h2>
+                <div class="contentbox">
+                    <div class="imgBx jarallax">
+                        <!-- 添加visualization.html中的年数评论数柱状图 -->
+                        <div id="year-chart" style="width: 100%; height: 400px;"></div>
+                    </div>
+                    <div class="content" data-jarallax-element="-200 0">
+                        <p>此图表展示了近几年来导引术相关话题的评论数量变化，反映了公众关注度的长期趋势。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="change qigong-section">
+        <h2 class="qigong-title">导引术</h2>
+        <div id="qigong-visualization">
+            <!-- 添加D3.js可视化相关的脚本 -->
+            <script src='https://d3js.org/d3.v3.min.js'></script>
+            <script src="./js/链接.js"></script>
+        </div>
+
+        <style>
+            .qigong-section {
+                margin: 0;
+                padding: 20px;
+                font-family: 'Noto Sans SC', 'Open Sans', sans-serif;
+            }
+            
+            .qigong-title {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+            
+            #qigong-visualization {
+                zoom: 0.5;
+                width: 100%;
+                height: 200vh;
+                /* 将高度从200vh改为80vh，即视口高度的80% */
+            }
+        </style>
+    </div>
+    <a href="click.html" class="yinyang-button" style="height: 20px;">
+        <img src="images/yinyang.jpg" alt="阴阳相生">
+    </a>
+
+    <!-- 添加阴阳按钮的样式 -->
+    <style>
+        .yinyang-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px !important;
+            /* 覆盖内联样式 */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        
+        .yinyang-button img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .yinyang-button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    <script src="js/jarallax.js"></script>
+    <script src="js/jarallax-element.js"></script>
+    <script type="text/javascript">
+        jarallax(document.querySelectorAll('.jarallax'), {
+            speed: 0.6
+        });
+    </script>
+
+    <!-- ECharts图表脚本 -->
+    <script>
+        // 整理 dataset.source 数据为二维数组形式
+        let sourceData = [
+            ['时间', '马王堆导引术', '易筋经', '八段锦', '五禽戏', '黄帝内经', '导引术', '综合'],
+            ['2020年1-3月', 45, 165804, 2079343, 850086, 226918, 21603, 3343799],
+            ['2020年4-6月', 435, 81270, 2801139, 361873, 6052, 2910, 3253679],
+            ['2020年7-9月', 81, 19410, 7049251, 154510, 21363, 2917, 7247532],
+            ['2020年10-12月', 430, 128368, 422151, 238846, 2759, 3025, 795579],
+            ['2021年1-3月', 23, 11852, 247682, 110975, 29359, 991, 400882],
+            ['2021年4-6月', 20, 548528, 489531, 211307, 1478, 7295, 1258159],
+            ['2021年7-9月', 2414, 173622, 979534, 517587, 258175, 5346, 1936678],
+            ['2021年10-12月', 1, 66380, 1174463, 728047, 105153, 1323, 2075367],
+            ['2022年1-3月', 2, 26686, 170852, 66628, 36887, 1727, 302782],
+            ['2022年4-6月', 10283, 39444, 299325, 45625, 9530, 10833, 415040],
+            ['2022年7-9月', 37, 23762, 448514, 0, 1920, 962, 475195],
+            ['2022年10-12月', 78, 56702, 3291970, 256, 5638, 1087, 3355731],
+            ['2023年1-3月', 1825, 52572, 30608, 152, 2968, 2709, 90834],
+            ['2023年4-6月', 2651, 41472, 3273920, 0, 17054, 3816, 3338913],
+            ['2023年7-9月', 17, 74450, 2936069, 1788, 1026610, 20871, 4059805],
+            ['2023年10-12月', 30, 24708, 3171113, 7048, 113558, 12895, 3329352],
+            ['2024年1-3月', 21, 13472, 3967673, 1847066, 975434, 8933, 6812599],
+            ['2024年4-6月', 5607, 27486, 2161668, 1871897, 542862, 9594, 4619114],
+            ['2024年7-9月', 1423, 30366, 1535226, 0, 731980, 3210, 2302205],
+            ['2024年10-12月', 2694, 98534, 2800156, 0, 1492870, 7011, 4401265]
+        ];
+        // 第二步：基于已经创建的容器生成一个 echarts 实例
+        //选择容器
+        let dom = document.getElementById('firstchart');
+        //基于容器dom创建一个echarts实例
+        let mychart = echarts.init(dom);
+        let option = {
+            dataset: {
+                source: sourceData
+            },
+            title: {
+                text: ''
+            },
+            legend: {
+                // 添加所有系列名称到 legend.data
+                data: ['马王堆导引术', '易筋经', '八段锦', '五禽戏', '黄帝内经', '导引术', '综合'],
+                textStyle: {
+                    color: 'black' // 设置图例文字颜色为黑色
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: function(params) {
+                    return params.seriesName;
+                }
+            },
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false
+            },
+            yAxis: {},
+            series: [{
+                name: '马王堆导引术',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'RGB(239, 164, 132)'
+                    }, {
+                        offset: 1,
+                        color: 'RGB(182, 118, 108)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'RGB(239, 164, 132)'
+                    }, {
+                        offset: 1,
+                        color: 'RGB(182, 118, 108)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '易筋经',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(235, 207, 158)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(239,164, 132)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(235, 207, 158)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(239,164, 132)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '八段锦',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(197, 233, 227)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 183, 195)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(197, 233, 227)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(255, 183, 195)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '五禽戏',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(184, 168, 207)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(231, 188, 198)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(184, 168, 207)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(231, 188, 198)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '黄帝内经',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(138, 140, 191)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(184, 168, 207)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(138, 140, 191)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(184, 168, 207)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '导引术',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(182, 118, 108)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(182, 118, 108)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'rgb(182, 118, 108)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(182, 118, 108)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }, {
+                name: '综合',
+                type: 'line',
+                stack: 'Total',
+                smooth: true,
+                lineStyle: {
+                    width: 0
+                },
+                showSymbol: false,
+                areaStyle: {
+                    opacity: 0.8,
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'RGB(078, 101, 155)'
+                    }, {
+                        offset: 1,
+                        color: 'RGB(138, 140, 191)'
+                    }]),
+                    emphasis: {
+                        opacity: 1
+                    }
+                },
+                itemStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0,
+                        color: 'RGB(078, 101, 155)'
+                    }, {
+                        offset: 1,
+                        color: 'RGB(138, 140, 191)'
+                    }])
+                },
+                emphasis: {
+                    focus: 'series'
+                },
+                datasetIndex: 0,
+                seriesLayoutBy: 'column'
+            }]
+        };
+        // 第四步：基于配置项进行实例的渲染
+        mychart.setOption(option);
+        window.addEventListener('resize', () => {
+            mychart.resize()
+        });
+    </script>
+
+    <!-- 添加visualization.html中的数据处理脚本 -->
+    <script>
+        // 加载 JSON 数据
+        fetch('./json/visualization_data.json')
+            .then(response => response.json())
+            .then(data => {
+                // 时间评论数图表
+                const timeChart = echarts.init(document.getElementById('time-chart'));
+                const timeOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: params => `${params[0].name}<br/>评论数量: ${params[0].value}`
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [],
+                        type: 'line'
+                    }]
+                };
+                timeChart.setOption(timeOption);
+                // 处理数据，将 11 months ago 之前的评论数据归类到 recent 1 year
+                const newTimeCommentCount = {};
+                let recentOneYearCount = 0;
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    // 新增过滤条件：跳过源数据中的 recent 1 year
+                    if (time === 'recent 1 year') continue;
+
+                    // 修改判断条件：仅累加月份数超过11的条目（即12个月前的数据）
+                    if (time.includes('years ago') || time.includes('year ago') || (time.includes('months ago') && parseInt(time.split(' ')[0]) > 11)) {
+                        recentOneYearCount += count;
+                    } else {
+                        newTimeCommentCount[time] = count;
+                    }
+                }
+
+                const allTimes = Object.keys(newTimeCommentCount);
+                let currentIndex = 0;
+                const intervalId = setInterval(() => {
+                    if (currentIndex >= allTimes.length) {
+                        clearInterval(intervalId);
+                        return;
+                    }
+                    const currentTime = allTimes[currentIndex];
+                    const currentCount = newTimeCommentCount[currentTime];
+                    timeOption.xAxis.data.push(currentTime);
+                    timeOption.series[0].data.push(currentCount);
+                    timeChart.setOption(timeOption);
+                    currentIndex++;
+                }, 1000); // 每秒更新一次
+
+                // 处理年数评论数数据
+                const yearCommentCount = {};
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    // 跳过 recent 1 year 的处理
+                    if (time === 'recent 1 year') break;
+
+                    if (time.includes('years ago')) {
+                        const years = parseInt(time.split(' ')[0]);
+                        yearCommentCount[years] = count; // 直接使用原始值
+                    } else if (time === '1 year ago') {
+                        yearCommentCount[1] = count; // 直接使用原始值
+                    }
+                }
+
+                // 构建有序年份数组（仅含 X years ago）
+                const allYears = Object.keys(yearCommentCount)
+                    .sort((a, b) => a - b)
+                    .map(year => `${year} years ago`);
+
+                // 处理年数评论数据 - 使用visualization.html中的方式
+                const yearLabels = [];
+                const yearData = [];
+
+                // 直接使用原始数据中的年份字段
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    if (time.includes('year')) { // 包含所有带year的字段
+                        yearLabels.push(time.replace('recent ', '')); // 转换标签格式
+                        yearData.push(count);
+                    }
+                }
+
+                // 配置年份图表
+                const yearChart = echarts.init(document.getElementById('year-chart'));
+                const yearOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: params => `${params[0].name}<br/>评论数量: ${params[0].value}`
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: yearLabels,
+                        axisLabel: {
+                            rotate: 45
+                        }
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: yearData,
+                        type: 'bar',
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#83bff6'
+                            }, {
+                                offset: 0.5,
+                                color: '#188df0'
+                            }, {
+                                offset: 1,
+                                color: '#188df0'
+                            }])
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 0.7,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 1,
+                                    color: '#83bff6'
+                                }])
+                            }
+                        }
+                    }]
+                };
+
+                yearChart.setOption(yearOption);
+
+                let yearIndex = 0;
+
+                const yearIntervalId = setInterval(() => {
+                    if (yearIndex >= allYears.length) {
+                        clearInterval(yearIntervalId);
+                        return;
+                    }
+                    const currentYear = allYears[yearIndex];
+                    const currentYearCount = currentYear === 'recent 1 year' ? yearCommentCount[1] : yearCommentCount[parseInt(currentYear.split(' ')[0])];
+
+                    yearOption.xAxis.data.push(currentYear);
+                    yearOption.series[0].data.push(currentYearCount);
+
+                    yearChart.setOption(yearOption);
+                    yearIndex++;
+                }, 1000); // 每秒更新一次
+
+                // heart 为 true 的评论占比图表
+                const heartChart = echarts.init(document.getElementById('heart-chart'));
+                const heartOption = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: params => `
+                            ${params.name}<br/>
+                            数量: ${params.value}<br/>
+                            占比: ${params.percent}%
+                        `
+                    },
+                    series: [{
+                        type: 'pie',
+                        radius: '50%',
+                        data: [{
+                            value: data.heart_true_count,
+                            name: '获赞的评论',
+                            itemStyle: {
+                                color: '#b9d7ea'
+                            }
+                        }, {
+                            value: data.total_comments - data.heart_true_count,
+                            name: '其他评论',
+                            itemStyle: {
+                                color: '#769fcd'
+                            }
+                        }]
+                    }]
+                };
+                heartChart.setOption(heartOption);
+
+                // 添加窗口大小变化时的自适应调整
+                window.addEventListener('resize', function() {
+                    timeChart.resize();
+                    // 删除userChart.resize()
+                    heartChart.resize();
+                    yearChart.resize();
+                });
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>评论数据可视化</title>
+    <!-- 引入 Echarts 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+</head>
+
+<body>
+    <!-- 定义图表容器 -->
+    <div id="time-chart" style="width: 100%; height: 400px;"></div>
+    <div id="user-chart" style="width: 100%; height: 400px;"></div>
+    <div id="heart-chart" style="width: 100%; height: 400px;"></div>
+    <!-- 新增年数评论数柱状图容器 -->
+    <div id="year-chart" style="width: 100%; height: 400px;"></div>
+
+
+    <script>
+        // 加载 JSON 数据
+        fetch('./json/visualization_data.json')
+            .then(response => response.json())
+            .then(data => {
+                // 时间评论数图表
+                const timeChart = echarts.init(document.getElementById('time-chart'));
+                const timeOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: params => `${params[0].name}<br/>评论数量: ${params[0].value}`
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: []
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: [],
+                        type: 'line'
+                    }]
+                };
+                timeChart.setOption(timeOption);
+                // 处理数据，将 11 months ago 之前的评论数据归类到 recent 1 year
+                const newTimeCommentCount = {};
+                let recentOneYearCount = 0;
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    // 新增过滤条件：跳过源数据中的 recent 1 year
+                    if (time === 'recent 1 year') continue;
+
+                    // 修改判断条件：仅累加月份数超过11的条目（即12个月前的数据）
+                    if (time.includes('years ago') || time.includes('year ago') || (time.includes('months ago') && parseInt(time.split(' ')[0]) > 11)) {
+                        recentOneYearCount += count;
+                    } else {
+                        newTimeCommentCount[time] = count;
+                    }
+                }
+
+                const allTimes = Object.keys(newTimeCommentCount);
+                let currentIndex = 0;
+                const intervalId = setInterval(() => {
+                    if (currentIndex >= allTimes.length) {
+                        clearInterval(intervalId);
+                        return;
+                    }
+                    const currentTime = allTimes[currentIndex];
+                    const currentCount = newTimeCommentCount[currentTime];
+                    timeOption.xAxis.data.push(currentTime);
+                    timeOption.series[0].data.push(currentCount);
+                    timeChart.setOption(timeOption);
+                    currentIndex++;
+                }, 1000); // 每秒更新一次
+
+                // 处理年数评论数数据
+                const yearCommentCount = {};
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    // 跳过 recent 1 year 的处理
+                    if (time === 'recent 1 year') break;
+
+                    if (time.includes('years ago')) {
+                        const years = parseInt(time.split(' ')[0]);
+                        yearCommentCount[years] = count; // 直接使用原始值
+                    } else if (time === '1 year ago') {
+                        yearCommentCount[1] = count; // 直接使用原始值
+                    }
+                }
+
+                // 构建有序年份数组（仅含 X years ago）
+                const allYears = Object.keys(yearCommentCount)
+                    .sort((a, b) => a - b)
+                    .map(year => `${year} years ago`);
+
+                // 年数评论数柱状图
+                // 处理年数评论数数据
+                const yearLabels = [];
+                const yearData = [];
+
+                // 直接使用原始数据中的年份字段
+                for (const [time, count] of Object.entries(data.time_comment_count)) {
+                    if (time.includes('year')) { // 包含所有带year的字段
+                        yearLabels.push(time.replace('recent ', '')); // 转换标签格式
+                        yearData.push(count);
+                    }
+                }
+
+                // 配置年份图表
+                const yearChart = echarts.init(document.getElementById('year-chart'));
+                const yearOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: params => `${params[0].name}<br/>评论数量: ${params[0].value}`
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: yearLabels,
+                        axisLabel: {
+                            rotate: 45
+                        }
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: yearData,
+                        type: 'bar',
+                        itemStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#83bff6'
+                            }, {
+                                offset: 0.5,
+                                color: '#188df0'
+                            }, {
+                                offset: 1,
+                                color: '#188df0'
+                            }])
+                        },
+                        emphasis: {
+                            itemStyle: {
+                                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                                    offset: 0,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 0.7,
+                                    color: '#2378f7'
+                                }, {
+                                    offset: 1,
+                                    color: '#83bff6'
+                                }])
+                            }
+                        }
+                    }]
+                };
+
+                yearChart.setOption(yearOption);
+
+                let yearIndex = 0;
+
+                const yearIntervalId = setInterval(() => {
+                    if (yearIndex >= allYears.length) {
+                        clearInterval(yearIntervalId);
+                        return;
+                    }
+                    const currentYear = allYears[yearIndex];
+                    const currentYearCount = currentYear === 'recent 1 year' ? yearCommentCount[1] : yearCommentCount[parseInt(currentYear.split(' ')[0])];
+
+                    yearOption.xAxis.data.push(currentYear);
+                    yearOption.series[0].data.push(currentYearCount);
+
+                    yearChart.setOption(yearOption);
+                    yearIndex++;
+                }, 1000); // 每秒更新一次
+
+                // 用户评论数图表
+                const userChart = echarts.init(document.getElementById('user-chart'));
+                const userOption = {
+                    tooltip: {
+                        trigger: 'axis',
+                        formatter: params => `${params[0].name}<br/>评论次数: ${params[0].value}`
+                    },
+                    xAxis: {
+                        type: 'category',
+                        data: data.sorted_users.map(item => item[0])
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [{
+                        data: data.sorted_users.map(item => item[1]),
+                        type: 'bar'
+                    }]
+                };
+                userChart.setOption(userOption);
+
+                // heart 为 true 的评论占比图表
+                const heartChart = echarts.init(document.getElementById('heart-chart'));
+                const heartOption = {
+                    tooltip: {
+                        trigger: 'item',
+                        formatter: params => `
+                            ${params.name}<br/>
+                            数量: ${params.value}<br/>
+                            占比: ${params.percent}%
+                        `
+                    },
+                    series: [{
+                        type: 'pie',
+                        radius: '50%',
+                        data: [{
+                            value: data.heart_true_count,
+                            name: '获赞的评论',
+                            itemStyle: {
+                                color: '#b9d7ea'
+                            } // 新增浅橙色
+                        }, {
+                            value: data.total_comments - data.heart_true_count,
+                            name: '其他评论',
+                            itemStyle: {
+                                color: '#769fcd'
+                            }
+                        }]
+                    }]
+                };
+                heartChart.setOption(heartOption);
+            });
+    </script>
+</body>
+
+</html>
